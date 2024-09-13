@@ -1,0 +1,126 @@
+.nav{
+    position: fixed;
+    top : 0;
+    width: 100%;
+    height :30px;
+    z-index : 1;
+    padding : 20px;
+    display : flex;
+    justify-content: space-between;
+    align-items: center;
+    /*ANIMATION*/
+    transition-timing-function: ease-in;
+    transition: all 0.5s;
+}
+.nav__black{
+    background-color: #111;
+}
+.nav__logo{
+    position : fixed;
+    left: 40px;
+    width: 80px;
+    object-fit: contain;
+}
+.nav__avatar{
+    position: fixed;
+    right: 40px;
+    width : 30px;
+    object-fit: contain;
+}
+
+/* Seacrh Box */
+.nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    z-index: 1;
+    transition-timing-function: ease-in;
+    transition: all 0.5s;
+}
+
+.nav__black {
+    background-color: #111;
+}
+
+.nav__logo {
+    position: fixed;
+    left: 20px;
+    width: 80px;
+    object-fit: contain;
+}
+
+.nav__avatar {
+    position: fixed;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    z-index: 10;
+    transition-timing-function: ease-in;
+    transition: all 0.5s;
+}
+
+.nav__black {
+    background-color: rgba(0, 0, 0, 0.9); /* Dark background when active */
+}
+
+.nav__logo {
+    left: 20px;
+    width: 80px;
+    object-fit: contain;
+}
+
+.nav__avatar {
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.nav__microscope {
+    color: white;
+    font-size: 24px;
+    position: fixed;
+    right: 70px;
+}
+
+/* Search bar below the nav */
+.search__bar {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Same dark background as navbar */
+    padding: 10px 20px;
+    position: fixed;
+    top: 60px; /* Adjust this based on your nav height */
+    z-index: 9;
+}
+
+.search__input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    background-color: rgba(50, 50, 50, 0.8);
+    color: white;
+    border-radius: 4px;
+}
+
+/* Optional: Add a close animation or transition */
+.search__input:focus {
+    background-color: rgba(80, 80, 80, 0.9);
+}
+
