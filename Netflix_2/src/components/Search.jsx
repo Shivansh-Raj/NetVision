@@ -12,37 +12,58 @@ function Search({content}) {
     const [Movies, setMovies] = useState([])
     const [ready,setReady] = useState(false)
     const [genre, setGenre] = useState([])
+    const [genreDictionary, setgenreDictionary] = useState({})
     const baseUrl = `https://api.themoviedb.org/3/search/multi?query=${content}&api_key=${API_KEY}`
-    
+    let temp;
     useEffect (()=>{
-        async function fetchData(){
-            setReady(false)
-            const response = await fetch(baseUrl);
+        async function reduceToDict(genre) {
+            temp = genre.reduce((acc, gen) => {
+                try {
+                    acc[gen] = gen; 
+                    console.log("--->", gen);
+                } catch (error) {
+                    console.log("--->Failed for", gen, error.message);
+                }
+                return acc;
+            }, {}); 
+        
+            setgenreDictionary(temp);
+            console.log(genreDictionary)
+            // return genreDictionary; 
+        }
+        
+        async function fetchData() {
+            setReady(false);
             try {
-                const data = await response.json(); 
+                const response = await fetch(baseUrl);
+                const data = await response.json();
+                
                 setMovies(data.results);
-                setGenre(data.results[0].genre_ids)
-                console.log(data.results[0].genre_ids)
-                genre = genre.filter((gen)=>{
+                let genreIds = data.results[0].genre_ids;
+                genreIds = (genreIds.filter((gen) => {
                     try {
-                        console.log("--->",request_by_id[gen]["title"])
-                        return true;
-                    } catch {
-                        console.log("--->Failed for", gen)
-                        return false
+                        console.log("--->", request_by_id[gen]["title"]);
+                        return true; // Keep this item in the array if no error occurs
+                    } catch (error) {
+                        console.log("Error occurred for genre:", gen);
+                        return false; // Remove this item from the array if an error occurs
                     }
-                    // console.log(gen)
-                })
-            } catch(error) {
-                console.log("Error in Fetching the data")
+                }));
+                setGenre(genreIds);
+                // await reduceToDict(genreIds); 
+                console.log(genre)
+        
+            } catch (error) {
+                console.log("Error in Fetching the data", error);
             } finally {
-                setReady(true)
+                setReady(true);
             }
         }
+        
         fetchData()
     },[content])    
   return (
-    <>
+    <div style={{ padding: '100px 0 '}}>
         {ready && Movies.length != 0? (<><Row
             title={`Showing result for ${content}`}
             id="TN"
@@ -51,13 +72,13 @@ function Search({content}) {
             content={Movies}
         />
         {genre.map((gen) => (
-            <h1 key={gen.key}>{gen.key}</h1>
-            // <Row
-            //     key={gen.id}
-            //     title={`${request_by_id[{gen}]["title"]}`}
-            //     id="TN"
-            //     fetchUrl={`${request_by_id[{gen}]["url"]}`}
-            // />
+            // <h1 key={ gen}>{gen}</h1>
+            <Row
+                key={gen}
+                title={`${request_by_id[`${gen}`]["title"]}`}
+                id="TN"
+                fetchUrl={`${request_by_id[`${gen}`]["url"]}`}
+            />
         ))}
         </>
         
@@ -66,16 +87,27 @@ function Search({content}) {
                 (<>
                 <h2>Looking for "{content}"? We dont have that but you might like:</h2>
                     <Row
-                    title=""
+                    title="Trending on Netflix"
                     id="TN"
                     fetchUrl={requests.fetchTrending}
-                /></>
+                />
+                {genre.map((gen) => (
+                    // <h1 key={ gen}>{gen}</h1>
+                    <Row
+                        key={gen}
+                        title={`${request_by_id[`${gen}`]["title"]}`}
+                        id="TN"
+                        fetchUrl={`${request_by_id[`${gen}`]["url"]}`}
+                    />
+                ))}
+                </>
+                
                 )
                 :
                 (<CircularProgress/>)                
             }
         </>)}
-    </>
+    </div>
   )
 }
 
