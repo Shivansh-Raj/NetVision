@@ -36,6 +36,7 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content}) {
             fetchdata()
         } else {
             setMovies(content);
+            console.log("-->content at Row.jsx : ",content)
         }
     },[fetchUrl,content])
     useEffect(()=>{

@@ -40,6 +40,7 @@ function Search({content}) {
                 
                 setMovies(data.results);
                 let genreIds = data.results[0].genre_ids;
+                console.log(genreIds)
                 genreIds = (genreIds.filter((gen) => {
                     try {
                         console.log("--->", request_by_id[gen]["title"]);
@@ -51,7 +52,7 @@ function Search({content}) {
                 }));
                 setGenre(genreIds);
                 // await reduceToDict(genreIds); 
-                console.log(genre)
+                // console.log(genre)
         
             } catch (error) {
                 console.log("Error in Fetching the data", error);

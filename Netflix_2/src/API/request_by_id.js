@@ -28,8 +28,15 @@ const request_by_id = {
     878 : {"url":`/discover/movie?api_key=${API_KEY}&with_genres=878`,"title":"Sci-Fi Movies"},
     9648: {"url":`/discover/movie?api_key=${API_KEY}&with_genres=9648`,"title":"Mystery Movies"},
     35:{"url":`/discover/movie?api_key=${API_KEY}&with_genres=35`,"title":"Comedy Movies"},
+    80:{"url":`/discover/movie?api_key=${API_KEY}&with_genres=80`,"title":"Crime Movies"},
+    14:{"url":`/discover/movie?api_key=${API_KEY}&with_genres=14`,"title":"Fantasy Movies"},
+    36:{"url":`/discover/movie?api_key=${API_KEY}&with_genres=36`,"title":"History Movies"},
     27: {"url":`/discover/movie?api_key=${API_KEY}&with_genres=27`,"title":"Horror Movies"},
     10749: {"url":`/discover/movie?api_key=${API_KEY}&with_genres=10749`,"title":"Romance Movies"},
+    10752: {"url":`/discover/movie?api_key=${API_KEY}&with_genres=10752`,"title":"War & Politics"},
+    10764: {"url":`/discover/tv?api_key=${API_KEY}&with_genres=10764`,"title":"Reality TV shows"},
+    10762: {"url":`/discover/tv?api_key=${API_KEY}&with_genres=10762`,"title":"TV shows for kids"},
+    10765: {"url":`/discover/tv?api_key=${API_KEY}&with_genres=10765`,"title":"Sci-Fi & Fantasy TV shows"},
     99: {"url":`/discover/movie?api_key=${API_KEY}&with_genres=99`,"title":"Dcoumentries"},
 }
 
