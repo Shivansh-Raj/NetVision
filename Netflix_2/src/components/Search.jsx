@@ -13,7 +13,8 @@ function Search({content}) {
     const [ready,setReady] = useState(false)
     const [genre, setGenre] = useState([])
     const [genreDictionary, setgenreDictionary] = useState({})
-    const baseUrl = `https://api.themoviedb.org/3/search/multi?query=${content}&api_key=${API_KEY}`
+    const baseUrl = `https://api.themoviedb.org/3/search/multi?query=${content}&include_adult=false&api_key=${API_KEY}`
+    // &language=jv-JP
     let temp;
     useEffect (()=>{
         async function reduceToDict(genre) {
@@ -69,6 +70,13 @@ function Search({content}) {
             title={`Showing result for ${content}`}
             id="TN"
             // isLarge
+            isSearch
+            content={Movies}
+        />
+        <Row
+            title={`Showing result for ${content}`}
+            id="TN"
+            isLarge
             isSearch
             content={Movies}
         />

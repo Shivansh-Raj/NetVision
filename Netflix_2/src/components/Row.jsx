@@ -13,7 +13,7 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content}) {
     const [modalVisibility,setModalVisibility] = useState(false);
     const [movieSelected, setMovieSelection] = useState({});
     const [loading, setLoading] = useState(true);
-    // const [loadedImg, setImgLoaded] = useState(0)
+    const [loadedImg, setImgLoaded] = useState(0)
     const scrollRight = () => {
         if (rowRef.current) {
             rowRef.current.scrollLeft -= window.innerWidth +4;
@@ -24,6 +24,13 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content}) {
             rowRef.current.scrollLeft += window.innerWidth +4;
         }
     }
+    
+    useEffect(() => {
+        
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000); 
+      }, []);
 
     useEffect(()=>{
         if (!isSearch){
@@ -40,17 +47,18 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content}) {
         }
     },[fetchUrl,content])
     useEffect(()=>{
-        // if (loadedImg == Movies.length) {
-            setLoading(false);
-        // }
+        if (loadedImg == Movies.length) {
+            // setLoading(false);
+        }
     },[Movies.length])
     const handleClick = (movie) =>{
         setModalVisibility(true);
         setMovieSelection(movie);
     }
-    // const handleImageLoad = () => {
-    //     setImgLoaded((prev)=>prev+1)
-    // }
+    const handleImageLoad = () => {
+        setImgLoaded((prev)=>prev+1)
+    }
+    
 
   return (
     <section className="row">
@@ -67,8 +75,8 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content}) {
                             key={movie.id}
                             onClick={() => handleClick(movie)}
                             src={`${baseUrl}${isLarge?movie.backdrop_path : movie.poster_path}`}
-                            className={`row__poster ${isLarge && "row__posterLarge"}` }
-                            // onLoad={handleImageLoad}
+                            className={`row__poster` /**${isLarge && "row__posterLarge"}`**/ }
+                            onLoad={handleImageLoad}
                             loading='lazy'
                             alt={movie.name}
                         />

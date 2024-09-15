@@ -1,0 +1,151 @@
+
+
+.app {
+  text-align: center;
+  color: #fff;
+}
+
+.app__background {
+  background: url('../assets/background.png') no-repeat center center;
+  background-size: cover;
+  height: 100vh; /* Full viewport height */
+  width: 100vw;  /* Full viewport width */
+  position: relative;
+  overflow: hidden;
+}
+
+.app__logo {
+  position: absolute;
+  left: 5vw; /* Adjusted to 5% from the left */
+  top: 3vh;  /* Adjusted to 3% from the top */
+  width: 12vw; /* Adjusted logo width to 12% of viewport width */
+  z-index: 999;
+}
+
+.app__button {
+  background-color: #e50914;
+  border: none;
+  color: #fff;
+  padding: 1.5vh 3vw; /* Balanced padding */
+  font-size: 2vh;  /* Font size relative to viewport height */
+  cursor: pointer;
+  border-radius: 0.5vw;
+  position: absolute;
+  right: 5vw;   /* Adjusted to 5% from the right */
+  top: 3vh;     /* Adjusted to 3% from the top */
+  z-index: 999;
+}
+
+.app__gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20vh; /* Adjusted gradient height */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+}
+
+.app__body {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: rgba(0, 0, 0, 0.6); /* Lighter background for translucency */
+  padding: 3vh 5vw; /* Adjusted padding */
+  border-radius: 2vw; /* Adjusted border radius */
+  transform: translate(-50%, -50%);
+  width: 80vw; /* Adjusted width of body */
+  max-width: 600px; /* Limit maximum width */
+  text-align: center;
+}
+
+.app__input {
+  margin-top: 2vh; /* Spacing adjusted to be consistent */
+}
+
+.app__input input {
+  padding: 1.5vh; /* Reduced padding for better balance */
+  border: none;
+  border-radius: 0.5vw;
+  width: 60%; /* Width as a percentage of the container */
+  max-width: 350px; /* Limit the maximum width for better scaling */
+  margin-right: 1vw;
+}
+
+.app__getStarted {
+  background-color: #e50914;
+  border: none;
+  color: #fff;
+  padding: 1.5vh 3vw; /* Balanced padding */
+  font-size: 1.8vh;   /* Slightly smaller font size */
+  cursor: pointer;
+  border-radius: 0.5vw;
+}
+
+  
+  .app__sections {
+    margin-top: 20vh;
+    padding: 50px;
+    background-color: black;
+  }
+  
+  .app__section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 50px 0;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  
+  .app__section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .app__section img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+  }
+  
+  .app__section--left {
+    flex-direction: row;
+  }
+  
+  .app__section--right {
+    flex-direction: row-reverse;
+  }
+  
+  .app__text {
+    max-width: 400px;
+    text-align: left;
+    color: white;
+  }
+  
+  .app__text h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .app__text p {
+    font-size: 18px;
+  }
+  
+  @media (max-width: 768px) {
+    .app__section {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .app__section--left,
+    .app__section--right {
+      flex-direction: column;
+    }
+  
+    .app__text {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  }
+  

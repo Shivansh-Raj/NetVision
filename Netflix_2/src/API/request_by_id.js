@@ -37,7 +37,7 @@ const request_by_id = {
     10764: {"url":`/discover/tv?api_key=${API_KEY}&with_genres=10764`,"title":"Reality TV shows"},
     10762: {"url":`/discover/tv?api_key=${API_KEY}&with_genres=10762`,"title":"TV shows for kids"},
     10765: {"url":`/discover/tv?api_key=${API_KEY}&with_genres=10765`,"title":"Sci-Fi & Fantasy TV shows"},
-    99: {"url":`/discover/movie?api_key=${API_KEY}&with_genres=99`,"title":"Dcoumentries"},
+    99: {"url":`/discover/movie?include_adult=true&api_key=${API_KEY}&with_genres=99`,"title":"Dcoumentries"},
 }
 
 export default request_by_id
