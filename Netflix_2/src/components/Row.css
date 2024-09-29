@@ -88,6 +88,9 @@
     transition: transform 450ms;
     border-radius: 4px;
   }
+  .row__poster img {
+    height: 100%;
+  }
   .row__poster:hover {
     transform: scale(1.08);
   }

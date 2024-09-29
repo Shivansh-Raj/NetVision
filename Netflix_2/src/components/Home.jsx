@@ -7,7 +7,13 @@ import Row from './Row.jsx';
 function Home() {
   const [searching, setSearching] = useState(false)
 
-  
+  // useEffect =(()=>{
+  //   const observer = new IntersectionObserver (
+  //     (entries) => {
+  //       entries.forEach(entry)
+  //     }
+  //   )
+  // },[])
 
   return (
     <>

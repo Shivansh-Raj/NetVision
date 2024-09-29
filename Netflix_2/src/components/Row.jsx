@@ -15,7 +15,7 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content}) {
     const [modalVisibility,setModalVisibility] = useState(false);
     const [movieSelected, setMovieSelection] = useState({});
     const [loading, setLoading] = useState(true);
-    const [loadedImg, setImgLoaded] = useState(0)
+    const [loadingImg, setImageLoading] = useState([]);
     const scrollRight = () => {
         if (rowRef.current) {
             rowRef.current.scrollLeft -= window.innerWidth +4;
@@ -40,6 +40,8 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content}) {
                 setLoading(true);
                 const request = await axios.get(fetchUrl);
                 setMovies(request.data.results)
+                setImageLoading(Array(request.data.results.length).fill(true))
+                console.log(Array(request.data.results.length).fill(true));
                 return request
             }
             fetchdata()
@@ -50,15 +52,20 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content}) {
     },[fetchUrl,content])
     // useEffect(()=>{
     //     if (loadedImg == Movies.length) {
-    //         // setLoading(false);
-    //     }
+    //         setLoading(false);
+    //         console.log(loadedImg)
+    //     } 
     // },[loadedImg])
     const handleClick = (movie) =>{
         setModalVisibility(true);
         setMovieSelection(movie);
     }
-    const handleImageLoad = () => {
-        setImgLoaded((prev)=>prev+1)
+    const handleImageLoad = (index) => {
+        setImageLoading((prev) => {
+            const updatedLoading = [...prev];
+            updatedLoading[index] = false;
+            return updatedLoading
+        })
     }
     
 
@@ -71,7 +78,7 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content}) {
                 {/* {loading && <CircularProgress  color="secondary" />} */}
                 <div className="slider__arrow-left" ><span className="arrow" onClick={scrollRight}/*{()=>{document.getElementById(id).scrollLeft-=(window.innerWidth+4)}}*/><ArrowBackIosIcon/></span></div>
                 <div id={id} ref={rowRef} className="row__posters">
-                {loading && Array.from({ length: 10 }, (_, index) => (
+                {/* {loading && Array.from({ length: 10 }, (_, index) => (
                     <Box key = {index} className={`row__poster ${isLarge && "row__posterLarge"}` }>
                         <Skeleton 
                             variant="rectangular" 
@@ -81,23 +88,34 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content}) {
                             sx={{ bgcolor: 'grey.700' }} 
                         />
                     </Box> 
-                ))}
+                ))} */}
 
 
                     {/**SEVERAL ROW__POSTER */}
-                    {!loading && Movies.map(movie=>(
-                        <img
-                            key={movie.id}
-                            onClick={() => handleClick(movie)}
-                            src={`${baseUrl}${isLarge?movie.backdrop_path : movie.poster_path}`}
-                            className={`row__poster ${isLarge && "row__posterLarge"}` }
-                            onLoad={handleImageLoad}
-                            loading='lazy'
-                            alt={movie.name}
-                        />
+                    {Movies.map((movie,index)=>(
+                        <Box key = {index} className={`row__poster ${isLarge && "row__posterLarge"}` }>
+                            {loadingImg[index] && <Skeleton 
+                                variant="rectangular" 
+                                width={isLarge ? 300 : 100  }
+                                height='100%'
+                                animation="wave" 
+                                sx={{ bgcolor: 'grey.700' }} 
+                            />}
+                            
+                            <img
+                                onClick={() => handleClick(movie)}
+                                src={`${baseUrl}${isLarge?movie.backdrop_path : movie.poster_path}`}
+                                onLoad={setTimeout(() => handleImageLoad(index),100)}
+                                style={{ display: loadingImg[index] ? 'none' : 'block' }}
+                                loading='lazy'
+                                alt={movie.name}
+                            />
+                        </Box> 
                     ))}
                     
                 </div>
+                
+
                 <div className="slider__arrow-right" ><span className="arrow" onClick={scrollLeft}/*{()=>{document.getElementById(id).scrollLeft+=(window.innerWidth-4)}}*/><ArrowForwardIosIcon/></span></div>
             </div>
             {/* <h2>{movieSelected.title}{ movieSelected.name}</h2> */}
