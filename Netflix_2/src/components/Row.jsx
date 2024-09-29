@@ -4,7 +4,6 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForward';
 import axios from '../API/axios';
 import MovieTrailer from "./Movie_trailers/index"
-import CircularProgress from '@mui/material/CircularProgress';
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
 
@@ -27,14 +26,15 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content}) {
         }
     }
     
-    useEffect(() => {
+    // useEffect(() => {
         
-        setTimeout(() => {
-          setLoading(false);
-        }, 2000); 
-      }, []);
+    //     setTimeout(() => {
+    //       setLoading(false);
+    //     }, 2000); 
+    //   }, []);
 
     useEffect(()=>{
+        setLoading(true);
         if (!isSearch){
             async function fetchdata(){
                 setLoading(true);
@@ -42,14 +42,18 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content}) {
                 setMovies(request.data.results)
                 setImageLoading(Array(request.data.results.length).fill(true))
                 console.log(Array(request.data.results.length).fill(true));
+                console.log(request.data.results);
+                setLoading(false);
                 return request
             }
             fetchdata()
         } else {
             setMovies(content);
+            setImageLoading(Array(content.length).fill(true))
             console.log("-->content at Row.jsx : ",content)
+            setLoading(false)
         }
-    },[fetchUrl,content])
+    },[fetchUrl,content, isSearch])
     // useEffect(()=>{
     //     if (loadedImg == Movies.length) {
     //         setLoading(false);
@@ -61,6 +65,7 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content}) {
         setMovieSelection(movie);
     }
     const handleImageLoad = (index) => {
+        console.log(index)
         setImageLoading((prev) => {
             const updatedLoading = [...prev];
             updatedLoading[index] = false;
@@ -75,43 +80,44 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content}) {
             <h2>{title}</h2>
             <div className="slider">
                 
-                {/* {loading && <CircularProgress  color="secondary" />} */}
                 <div className="slider__arrow-left" ><span className="arrow" onClick={scrollRight}/*{()=>{document.getElementById(id).scrollLeft-=(window.innerWidth+4)}}*/><ArrowBackIosIcon/></span></div>
                 <div id={id} ref={rowRef} className="row__posters">
-                {/* {loading && Array.from({ length: 10 }, (_, index) => (
-                    <Box key = {index} className={`row__poster ${isLarge && "row__posterLarge"}` }>
-                        <Skeleton 
-                            variant="rectangular" 
-                            width={isLarge ? 300 : 100  }
-                            height='100%'
-                            animation="wave" 
-                            sx={{ bgcolor: 'grey.700' }} 
-                        />
-                    </Box> 
-                ))} */}
 
 
                     {/**SEVERAL ROW__POSTER */}
-                    {Movies.map((movie,index)=>(
-                        <Box key = {index} className={`row__poster ${isLarge && "row__posterLarge"}` }>
-                            {loadingImg[index] && <Skeleton 
-                                variant="rectangular" 
-                                width={isLarge ? 300 : 100  }
-                                height='100%'
-                                animation="wave" 
-                                sx={{ bgcolor: 'grey.700' }} 
-                            />}
-                            
-                            <img
-                                onClick={() => handleClick(movie)}
-                                src={`${baseUrl}${isLarge?movie.backdrop_path : movie.poster_path}`}
-                                onLoad={setTimeout(() => handleImageLoad(index),100)}
-                                style={{ display: loadingImg[index] ? 'none' : 'block' }}
-                                loading='lazy'
-                                alt={movie.name}
-                            />
-                        </Box> 
-                    ))}
+                    {loading? 
+                        Array.from({length:10},(_,index) => {
+                            <Box key={index} className={`row__poster ${isLarge && "row__posterLarge"}`}>
+                                <Skeleton
+                                    variant="rectangular"
+                                    width={isLarge ? 300 : 100}
+                                    height="100%"
+                                    animation="wave"
+                                    sx={{ bgcolor: 'grey.700' }}
+                                />
+                            </Box>
+                        }
+                        ):(Movies.map((movie,index)=>(
+                            <Box key = {index} className={`row__poster ${isLarge && "row__posterLarge"}` }>
+                                {loadingImg[index] && <Skeleton 
+                                    variant="rectangular" 
+                                    width={isLarge ? 300 : 100  }
+                                    height='100%'
+                                    animation="wave" 
+                                    sx={{ bgcolor: 'grey.700' }} 
+                                />}
+                                
+                                <img
+                                    onClick={() => handleClick(movie)}
+                                    src={`${baseUrl}${isLarge?movie.backdrop_path : movie.poster_path}`}
+                                    onLoad={() => handleImageLoad(index)}
+                                    style={{ display: loadingImg[index] ? 'none' : 'block' }}
+                                    // loading='lazy'
+                                    alt={movie.name}
+                                />
+                            </Box> 
+                        )))
+                    }
                     
                 </div>
                 
