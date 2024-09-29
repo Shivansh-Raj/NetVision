@@ -1,12 +1,13 @@
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import requests from '../API/requests.js';
 import Nav from './Nav.jsx';
 import Banner from './Banner.jsx';
 import Row from './Row.jsx';
-
 function Home() {
   const [searching, setSearching] = useState(false)
+
+  
 
   return (
     <>
@@ -14,7 +15,6 @@ function Home() {
       {!searching && (
         <>
           <Banner/>
-          {/* <Movie_trailers/> */}
           <Row
             title="Trending Now"
             id="TN"

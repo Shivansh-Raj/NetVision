@@ -69,6 +69,30 @@
     cursor: pointer;
     z-index: 2000;
   }
+
+  .trailer__controls {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    position: relative;
+    width: 90%; 
+    padding: 0 30px; 
+  }
+  
+  .arrow__left, .arrow__right {
+    cursor: pointer; 
+    font-size: 24px; 
+  }
+  
+  .arrow__left {
+    margin-left: 0;
+  }
+  
+  .arrow__right {
+    margin-right: 0; 
+  }
+  
+
   @media screen and (max-height: 768px) {
     .wrapper-modal {
       align-items: unset;

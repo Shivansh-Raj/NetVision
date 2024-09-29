@@ -5,6 +5,8 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForward';
 import axios from '../API/axios';
 import MovieTrailer from "./Movie_trailers/index"
 import CircularProgress from '@mui/material/CircularProgress';
+import Skeleton from '@mui/material/Skeleton';
+import Box from '@mui/material/Box';
 
 function Row({title,fetchUrl,id,isLarge, isSearch, content}) {
     const baseUrl = "https://image.tmdb.org/t/p/original/";
@@ -46,11 +48,11 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content}) {
             console.log("-->content at Row.jsx : ",content)
         }
     },[fetchUrl,content])
-    useEffect(()=>{
-        if (loadedImg == Movies.length) {
-            // setLoading(false);
-        }
-    },[Movies.length])
+    // useEffect(()=>{
+    //     if (loadedImg == Movies.length) {
+    //         // setLoading(false);
+    //     }
+    // },[loadedImg])
     const handleClick = (movie) =>{
         setModalVisibility(true);
         setMovieSelection(movie);
@@ -66,16 +68,29 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content}) {
             <h2>{title}</h2>
             <div className="slider">
                 
-                {loading && <CircularProgress  color="secondary" />}
+                {/* {loading && <CircularProgress  color="secondary" />} */}
                 <div className="slider__arrow-left" ><span className="arrow" onClick={scrollRight}/*{()=>{document.getElementById(id).scrollLeft-=(window.innerWidth+4)}}*/><ArrowBackIosIcon/></span></div>
                 <div id={id} ref={rowRef} className="row__posters">
+                {loading && Array.from({ length: 10 }, (_, index) => (
+                    <Box key = {index} className={`row__poster ${isLarge && "row__posterLarge"}` }>
+                        <Skeleton 
+                            variant="rectangular" 
+                            width={isLarge ? 300 : 100  }
+                            height='100%'
+                            animation="wave" 
+                            sx={{ bgcolor: 'grey.700' }} 
+                        />
+                    </Box> 
+                ))}
+
+
                     {/**SEVERAL ROW__POSTER */}
-                    {Movies.map(movie=>(
+                    {!loading && Movies.map(movie=>(
                         <img
                             key={movie.id}
                             onClick={() => handleClick(movie)}
                             src={`${baseUrl}${isLarge?movie.backdrop_path : movie.poster_path}`}
-                            className={`row__poster` /**${isLarge && "row__posterLarge"}`**/ }
+                            className={`row__poster ${isLarge && "row__posterLarge"}` }
                             onLoad={handleImageLoad}
                             loading='lazy'
                             alt={movie.name}

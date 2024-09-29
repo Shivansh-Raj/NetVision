@@ -13,25 +13,25 @@ function Search({content}) {
     const [ready,setReady] = useState(false)
     const [genre, setGenre] = useState([])
     const [genreDictionary, setgenreDictionary] = useState({})
-    const baseUrl = `https://api.themoviedb.org/3/search/multi?query=${content}&include_adult=false&api_key=${API_KEY}`
+    const baseUrl = `https://api.themoviedb.org/3/search/multi?query=${content}&include_adult=true&api_key=${API_KEY}&page=1`
     // &language=jv-JP
     let temp;
     useEffect (()=>{
-        async function reduceToDict(genre) {
-            temp = genre.reduce((acc, gen) => {
-                try {
-                    acc[gen] = gen; 
-                    console.log("--->", gen);
-                } catch (error) {
-                    console.log("--->Failed for", gen, error.message);
-                }
-                return acc;
-            }, {}); 
+        // async function reduceToDict(genre) {
+        //     temp = genre.reduce((acc, gen) => {
+        //         try {
+        //             acc[gen] = gen; 
+        //             console.log("--->", gen);
+        //         } catch (error) {
+        //             console.log("--->Failed for", gen, error.message);
+        //         }
+        //         return acc;
+        //     }, {}); 
         
-            setgenreDictionary(temp);
-            console.log(genreDictionary)
-            // return genreDictionary; 
-        }
+        //     setgenreDictionary(temp);
+        //     console.log(genreDictionary)
+        //     // return genreDictionary; 
+        // }
         
         async function fetchData() {
             setReady(false);
@@ -76,7 +76,7 @@ function Search({content}) {
         <Row
             title={`Showing result for ${content}`}
             id="TN"
-            isLarge
+            // isLarge
             isSearch
             content={Movies}
         />

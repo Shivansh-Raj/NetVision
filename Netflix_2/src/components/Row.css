@@ -7,7 +7,7 @@
   }
   .slider{
     position: relative;
-  
+    width: 95vw;
   }
   .slider__arrow-left{
     background-clip: content-box;
@@ -72,7 +72,8 @@
   .row__posters {
     display: flex;
     overflow-y: hidden;
-    overflow-x: scroll;
+    /* overflow-x: scroll; */
+    overflow-x: hidden;
     padding: 20px 0 20px 20px;
     scroll-behavior: smooth;
   }
@@ -82,7 +83,7 @@
   .row__poster {
     object-fit: contain;
     width: 100%;
-    max-height: 144px;
+    height: 144px;
     margin-right: 10px;
     transition: transform 450ms;
     border-radius: 4px;
@@ -91,7 +92,8 @@
     transform: scale(1.08);
   }
   .row__posterLarge {
-    max-height: 320px;
+    height: 180px;
+    /* max-height: 320px; */
   }
   .row__posterLarge:hover {
     transform: scale(1.1);
