@@ -41,8 +41,8 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content}) {
                 const request = await axios.get(fetchUrl);
                 setMovies(request.data.results)
                 setImageLoading(Array(request.data.results.length).fill(true))
-                console.log(Array(request.data.results.length).fill(true));
-                console.log(request.data.results);
+                // console.log(Array(request.data.results.length).fill(true));
+                // console.log(request.data.results);
                 setLoading(false);
                 return request
             }
@@ -50,7 +50,7 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content}) {
         } else {
             setMovies(content);
             setImageLoading(Array(content.length).fill(true))
-            console.log("-->content at Row.jsx : ",content)
+            // console.log("-->content at Row.jsx : ",content)
             setLoading(false)
         }
     },[fetchUrl,content, isSearch])
@@ -65,7 +65,7 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content}) {
         setMovieSelection(movie);
     }
     const handleImageLoad = (index) => {
-        console.log(index)
+        // console.log(index)
         setImageLoading((prev) => {
             const updatedLoading = [...prev];
             updatedLoading[index] = false;

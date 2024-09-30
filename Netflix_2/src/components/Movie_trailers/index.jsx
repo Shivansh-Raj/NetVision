@@ -69,7 +69,9 @@ function Movie_trailers({id,backdrop_path,poster_path,title,overview,name,releas
 
   const getRecommendations = () => {
     api.get(`/api/recommendations/${id}`)
-    .then(response => console.log(response.data))
+    .then(response => (
+      console.log(response.data)
+    ))
     .catch(error => console.log(error))
   }
   const next_trailer = () => {

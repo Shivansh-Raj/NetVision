@@ -13,7 +13,7 @@ function Search({content}) {
     const [ready,setReady] = useState(false)
     const [genre, setGenre] = useState([])
     const [genreDictionary, setgenreDictionary] = useState({})
-    const baseUrl = `https://api.themoviedb.org/3/search/multi?query=${content}&include_adult=true&api_key=${API_KEY}&page=1`
+    const baseUrl = `https://api.themoviedb.org/3/search/multi?query=${content}&include_adult=false&api_key=${API_KEY}&page=1`
     // &language=jv-JP
     let temp;
     useEffect (()=>{
@@ -41,13 +41,13 @@ function Search({content}) {
                 
                 setMovies(data.results);
                 let genreIds = data.results[0].genre_ids;
-                console.log(genreIds)
+                // console.log(genreIds)
                 genreIds = (genreIds.filter((gen) => {
                     try {
-                        console.log("--->", request_by_id[gen]["title"]);
+                        // console.log("--->", request_by_id[gen]["title"]);
                         return true; // Keep this item in the array if no error occurs
                     } catch (error) {
-                        console.log("Error occurred for genre:", gen);
+                        // console.log("Error occurred for genre:", gen);
                         return false; // Remove this item from the array if an error occurs
                     }
                 }));

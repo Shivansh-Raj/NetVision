@@ -22,11 +22,12 @@ function ProtectedRoute({children}) {
                 localStorage.setItem(ACCESS_TOKEN, res.data.access)
                 setAuthorized(true)
             } else {
+                console.log("Refresh Failed!")
                 setAuthorized(false)
             }
         } catch(error) {
             console.log(error)
-            setAuthorized(true)
+            setAuthorized(false)
         }
     };
 
