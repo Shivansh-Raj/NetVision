@@ -45,9 +45,10 @@ function Search({content}) {
                 genreIds = (genreIds.filter((gen) => {
                     try {
                         // console.log("--->", request_by_id[gen]["title"]);
+                        request_by_id[gen]["title"]
                         return true; // Keep this item in the array if no error occurs
                     } catch (error) {
-                        // console.log("Error occurred for genre:", gen);
+                        console.log("Error occurred for genre:", gen);
                         return false; // Remove this item from the array if an error occurs
                     }
                 }));

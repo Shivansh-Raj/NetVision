@@ -48,6 +48,7 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content}) {
             }
             fetchdata()
         } else {
+            console.log(content)
             setMovies(content);
             setImageLoading(Array(content.length).fill(true))
             // console.log("-->content at Row.jsx : ",content)

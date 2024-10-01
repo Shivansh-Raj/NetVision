@@ -63,7 +63,7 @@
     background: rgba(0, 0, 0, 0.4);
   }
   .modal-close {
-    position: absolute;
+    position: fixed;
     right: 20px;
     top: 20px;
     cursor: pointer;

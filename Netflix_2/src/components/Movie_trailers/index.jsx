@@ -8,12 +8,14 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import api from '../frontToBackend/api';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForward';
+import Find_by_id from '../find_by_id';
 
 function Movie_trailers({id,backdrop_path,poster_path,title,overview,name,release_date,first_air_date,vote_average,setModalVisibility}) {
   // const baseUrl =  "https://www.youtube.com/watch?v=";
   const ImgbaseUrl = "https://image.tmdb.org/t/p/original/";
   const [video_no, setVideo_no] = useState(0)
   const [total_trailers, setTotal_trailers] = useState(0);
+  const [data_id, set_data_id] = useState([])
   const opts = {
     height : "300",
     width : "100%",
@@ -35,9 +37,6 @@ function Movie_trailers({id,backdrop_path,poster_path,title,overview,name,releas
   const [trailerUrl ,setTrailerUrl] = useState("") 
   useEffect (() => {
     console.log(id,"    ",video_no)
-    // if(trailerUrl){
-    //   setTrailerUrl('')
-    // } else {
       const fetchTrailer = async() => {
         try {
           const trailerBaseUrl = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`;
@@ -69,9 +68,13 @@ function Movie_trailers({id,backdrop_path,poster_path,title,overview,name,releas
 
   const getRecommendations = () => {
     api.get(`/api/recommendations/${id}`)
-    .then(response => (
-      console.log(response.data)
-    ))
+    .then(response => {
+      set_data_id(response.data);
+      // let recommendations = Object.values(response.data);
+      // recommendations.map((result) => {
+      //   console.log(`Title: ${result.title}, ID: ${result.id}`);
+      // })
+    })
     .catch(error => console.log(error))
   }
   const next_trailer = () => {
@@ -109,6 +112,7 @@ function Movie_trailers({id,backdrop_path,poster_path,title,overview,name,releas
                         <p className="modal__overview">{overview}</p>
                         <p className="modal__overview">Vote Average: {vote_average}</p>
                     </div>
+                    {data_id.length>0 && <Find_by_id ids = {data_id}/>}
                 </div>
             </div>
         </div>
