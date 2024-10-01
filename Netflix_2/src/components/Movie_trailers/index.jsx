@@ -80,7 +80,7 @@ function Movie_trailers({id,backdrop_path,poster_path,title,overview,name,releas
         console.log("Added to HISTORY", response.data)
       })
       .catch((error)=>{
-        console.error("Error adding to History",error.response)
+        console.error("Error adding to History",error)
       })
     })
     .catch(error => console.log(error));

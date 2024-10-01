@@ -19,8 +19,25 @@ class historySerializer(serializers.ModelSerializer):
         model = history
         fields = ['showId','user_name','watched_at']
         extra_kwargs = {'user_name': {'read_only': True}, 'watched_at': {'read_only': True}}
-    # def create(self, data):
-    #     print("----------------------------------------------------------",data)
-    #     return data
+
+    def validate_showId(self, value):
+        try:
+            # value = int(value)
+            if value <= 0:
+                raise serializers.ValidationError("Show ID must be greater than 0.")
+            user_name = self.context['request'].user
+            history_exists = history.objects.filter(user_name=user_name, showId=value)
+            print(f"Query: {history_exists.query}")
+            print(f"Checking for showId {value} for user {user_name} ")
+            if history.objects.filter(user_name=user_name, showId=value).exists():
+                raise serializers.ValidationError("This show is already in your history.")
+            return value
+        except Exception as e:
+            print(f"Serializer error : {e}")
+    def child_create(self, validated_data):
+        user_name = self.context['request'].user
+        validated_data['user_name'] = user_name
+        return super().create(validated_data)
+
 
 
