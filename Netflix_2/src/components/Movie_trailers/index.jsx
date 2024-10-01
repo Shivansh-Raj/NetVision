@@ -75,8 +75,16 @@ function Movie_trailers({id,backdrop_path,poster_path,title,overview,name,releas
       // recommendations.map((result) => {
       //   console.log(`Title: ${result.title}, ID: ${result.id}`);
       // })
+      api.post(`/api/addToHistory/${id}`)
+      .then((response)=>{
+        console.log("Added to HISTORY", response.data)
+      })
+      .catch((error)=>{
+        console.error("Error adding to History",error.response)
+      })
     })
-    .catch(error => console.log(error))
+    .catch(error => console.log(error));
+
   }
   const next_trailer = () => {
     if (total_trailers > 0) {

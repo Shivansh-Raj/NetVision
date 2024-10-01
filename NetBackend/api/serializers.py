@@ -17,7 +17,10 @@ class userSerializer(serializers.ModelSerializer):
 class historySerializer(serializers.ModelSerializer):
     class Meta:
         model = history
-        fields = ['movieId','name','user']
-        extra_kwargs = {'user_name':{'read_only':True}}
+        fields = ['showId','user_name','watched_at']
+        extra_kwargs = {'user_name': {'read_only': True}, 'watched_at': {'read_only': True}}
+    # def create(self, data):
+    #     print("----------------------------------------------------------",data)
+    #     return data
 
 
