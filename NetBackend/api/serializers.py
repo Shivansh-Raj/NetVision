@@ -30,7 +30,8 @@ class historySerializer(serializers.ModelSerializer):
             print(f"Query: {history_exists.query}")
             print(f"Checking for showId {value} for user {user_name} ")
             if history.objects.filter(user_name=user_name, showId=value).exists():
-                raise serializers.ValidationError("This show is already in your history.")
+                history.objects.filter(user_name=user_name, showId=value).delete()
+                # raise serializers.ValidationError("This show is already in your history.")
             return value
         except Exception as e:
             print(f"Serializer error : {e}")

@@ -38,16 +38,22 @@ class addToHistory(APIView):
     def get(self, request,show_id=None):
         try:
             user = request.user
-            data = history.objects.filter(user_name = user).order_by('-watched_at')[:11]
+            data = history.objects.filter(user_name = user).order_by('-watched_at')
             print(data)
-            if data.exists():
-                history_list = list(data.values())
-                return Response(history_list, status=status.HTTP_200_OK)
+            if data:
+                if(len(data) >30):
+                    history_list = list(data[:30].values())
+                else :
+                    history_list = list(data.values())
+                # return Response(history_list, status=status.HTTP_200_OK)
+                return JsonResponse(history_list, safe=False)
+
             else:
                 return Response({"message": "No history found."}, status=status.HTTP_404_NOT_FOUND)
-        except:
+        except Exception as e:
             print("No history found")
-            return Response({"error":str(e)},status=status.HTTP_400_BAD_REQUEST)
+            print("----error",str(e))
+            return Response({"----error":str(e)},status=status.HTTP_400_BAD_REQUEST)
 
 
 

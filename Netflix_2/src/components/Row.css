@@ -81,6 +81,9 @@
     display: none;
   }
   .row__poster {
+    display: flex;
+    justify-content: center;
+    text-align: center;
     object-fit: contain;
     width: 100%;
     height: 144px;
@@ -92,7 +95,7 @@
     height: 100%;
   }
   .row__poster:hover {
-    transform: scale(1.08);
+    transform: scale(1.2);
   }
   .row__posterLarge {
     height: 180px;

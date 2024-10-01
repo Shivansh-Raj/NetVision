@@ -4,9 +4,12 @@ import requests from '../API/requests.js';
 import Nav from './Nav.jsx';
 import Banner from './Banner.jsx';
 import Row from './Row.jsx';
+import api from './frontToBackend/api.js';
+import Find_by_id from './find_by_id.jsx';
+
 function Home() {
   const [searching, setSearching] = useState(false)
-
+  const [history, setHistory] = useState([])
   // useEffect =(()=>{
   //   const observer = new IntersectionObserver (
   //     (entries) => {
@@ -14,6 +17,21 @@ function Home() {
   //     }
   //   )
   // },[])
+  useEffect(()=>{
+    api.get(`/api/addToHistory/0`)
+    .then((response)=>{
+      console.log("History watch : ", response.data)
+      // if (localStorage.getItem("history")) {
+      //   setHistory(localStorage.getItem("history"));
+      // } else {
+        setHistory(response.data)
+      //   localStorage.setItem("history",response.data)
+      // }
+    })
+    .catch((error)=>{
+      console.error("Error in fetching history",error)
+    })
+  },[])
 
   return (
     <>
@@ -27,6 +45,11 @@ function Home() {
             isLarge
             fetchUrl={requests.fetchTrending}
           />
+          {history.length>0 && <Find_by_id
+          title = "Continue Watching"
+          idkey='showId'
+          ids={history}
+          />}
           <Row
             title="Top Rated"
             id="TR"

@@ -71,6 +71,7 @@ function Movie_trailers({id,backdrop_path,poster_path,title,overview,name,releas
     api.get(`/api/recommendations/${id}`)
     .then(response => {
       set_data_id(response.data);
+      console.log(response.data)
       // let recommendations = Object.values(response.data);
       // recommendations.map((result) => {
       //   console.log(`Title: ${result.title}, ID: ${result.id}`);
@@ -81,14 +82,6 @@ function Movie_trailers({id,backdrop_path,poster_path,title,overview,name,releas
       })
       .catch((error)=>{
         console.error("Error adding to History",error)
-      })
-      
-      api.get(`/api/addToHistory/${id}`)
-      .then((response)=>{
-        console.log("History watch : ", response.data)
-      })
-      .catch((error)=>{
-        console.error("Error in fetching history",error)
       })
     })
     .catch(error => console.log(error));
@@ -129,7 +122,9 @@ function Movie_trailers({id,backdrop_path,poster_path,title,overview,name,releas
                         <p className="modal__overview">{overview}</p>
                         <p className="modal__overview">Vote Average: {vote_average}</p>
                     </div>
-                    <div className="similar__result">{data_id.length>0 && <Find_by_id ids = {data_id}/>}</div>
+                    <div className="similar__result">{data_id.length>0 && 
+                      <Find_by_id title = "Similar Shows & Movies" idkey = 'id' ids = {data_id}/>
+                    }</div>
                 </div>
             </div>
         </div>
