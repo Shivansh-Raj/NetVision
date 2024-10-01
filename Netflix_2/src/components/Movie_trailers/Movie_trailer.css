@@ -69,6 +69,10 @@
     cursor: pointer;
     z-index: 2000;
   }
+  .similar__result {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
 
   .trailer__controls {
     display: flex;

@@ -36,7 +36,8 @@ function Movie_trailers({id,backdrop_path,poster_path,title,overview,name,releas
   
   const [trailerUrl ,setTrailerUrl] = useState("") 
   useEffect (() => {
-    console.log(id,"    ",video_no)
+      console.log(id,"    ",video_no)
+      getRecommendations()
       const fetchTrailer = async() => {
         try {
           const trailerBaseUrl = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`;
@@ -94,8 +95,8 @@ function Movie_trailers({id,backdrop_path,poster_path,title,overview,name,releas
                     {trailerUrl ? <Youtube videoId={`${trailerUrl}`} onError={(event)=>handleVideoError(event)} opts={opts}/> :                     
                     (<img
                       className="modal__poster-img"
-                      // src={`${ImgbaseUrl}${backdrop_path?backdrop_path:poster_path}`}
-                      src={`${ImgbaseUrl}${poster_path}`}
+                      src={`${ImgbaseUrl}${backdrop_path?backdrop_path:poster_path}`}
+                      // src={`${ImgbaseUrl}${poster_path}`}
                       />)}
                       <span onClick={()=>setModalVisibility(false)}className="modal-close"><CancelIcon/></span>
                       <div className="trailer__controls" >
@@ -107,12 +108,12 @@ function Movie_trailers({id,backdrop_path,poster_path,title,overview,name,releas
                     <div className="modal__content">
                         <p className="modal__details"><span className="modal__user-perc">{randomPorcentaje
                         ()}% for you</span> {release_date ? release_date : first_air_date}</p>
-                        <button className="banner__button play" onClick = {getRecommendations}><PlayArrowIcon />Play</button>
+                        <button className="banner__button play" /*onClick = {getRecommendations}*/><PlayArrowIcon />Play</button>
                         <h2 className="modal__title">{title ? title : name}</h2>
                         <p className="modal__overview">{overview}</p>
                         <p className="modal__overview">Vote Average: {vote_average}</p>
                     </div>
-                    {data_id.length>0 && <Find_by_id ids = {data_id}/>}
+                    <div className="similar__result">{data_id.length>0 && <Find_by_id ids = {data_id}/>}</div>
                 </div>
             </div>
         </div>

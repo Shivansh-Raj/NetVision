@@ -36,7 +36,7 @@ function Find_by_id({ids}) {
     }, [details]);
   return (
     <>
-        {details.length > 10 && <Row title="Similar Movies and Shows" id="TN" isSearch content={details}/>}
+        {details.length > 9 && <Row title="Similar Movies and Shows" id="TN" isSearch content={details}/>}
     </>
   )
 }
