@@ -82,6 +82,14 @@ function Movie_trailers({id,backdrop_path,poster_path,title,overview,name,releas
       .catch((error)=>{
         console.error("Error adding to History",error)
       })
+      
+      api.get(`/api/addToHistory/${id}`)
+      .then((response)=>{
+        console.log("History watch : ", response.data)
+      })
+      .catch((error)=>{
+        console.error("Error in fetching history",error)
+      })
     })
     .catch(error => console.log(error));
 

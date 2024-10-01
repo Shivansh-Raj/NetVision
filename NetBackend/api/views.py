@@ -24,7 +24,6 @@ class addToHistory(APIView):
             user = request.user
             print(f"---------------Current user: {user}") 
             data = {
-                'user_name':user,
                 'showId':show_id
             }
             serializer = historySerializer(data=data, context={'request': request})
@@ -35,7 +34,21 @@ class addToHistory(APIView):
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         except Exception as e:
+            return Response({"error":e},status=status.HTTP_400_BAD_REQUEST)
+    def get(self, request,show_id=None):
+        try:
+            user = request.user
+            data = history.objects.filter(user_name = user).order_by('-watched_at')[:11]
+            print(data)
+            if data.exists():
+                history_list = list(data.values())
+                return Response(history_list, status=status.HTTP_200_OK)
+            else:
+                return Response({"message": "No history found."}, status=status.HTTP_404_NOT_FOUND)
+        except:
+            print("No history found")
             return Response({"error":str(e)},status=status.HTTP_400_BAD_REQUEST)
+
 
 
 

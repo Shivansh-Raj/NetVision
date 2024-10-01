@@ -34,9 +34,12 @@ class historySerializer(serializers.ModelSerializer):
             return value
         except Exception as e:
             print(f"Serializer error : {e}")
-    def child_create(self, validated_data):
+    def create(self, validated_data):
         user_name = self.context['request'].user
         validated_data['user_name'] = user_name
+        # By writing this super we are calling parent's class create function
+        # In this case parent is modelserializer
+        # and create() is a build in function of serializer
         return super().create(validated_data)
 
 
