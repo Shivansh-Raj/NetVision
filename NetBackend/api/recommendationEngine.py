@@ -24,7 +24,7 @@ class RecommendationSystem:
                 #     return pd.DataFrame({'error':["No such data found"]})
                 idx = self.shows[self.shows['id']==show_mov_id].index[0]
                 shows_idx = self.indices[idx]
-                return self.shows.iloc[shows_idx][['name','id']]
+                return self.shows.iloc[shows_idx][['title','id']]
             except Exception as e:
                 print(e)
                 return pd.DataFrame({'error':["No such data found"]})

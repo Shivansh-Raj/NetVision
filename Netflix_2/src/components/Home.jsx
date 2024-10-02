@@ -10,6 +10,7 @@ import Find_by_id from './find_by_id.jsx';
 function Home() {
   const [searching, setSearching] = useState(false)
   const [history, setHistory] = useState([])
+  const [based_on_watch, set_watch_based] = useState({})
   // useEffect =(()=>{
   //   const observer = new IntersectionObserver (
   //     (entries) => {
@@ -31,6 +32,20 @@ function Home() {
     .catch((error)=>{
       console.error("Error in fetching history",error)
     })
+    api.get(`/api/get_for_you`)
+    .then((response)=>{
+      // console.log("Based on your watches : ", Object.values(response.data))
+      set_watch_based(response.data)
+      // if (localStorage.getItem("history")) {
+      //   setHistory(localStorage.getItem("history"));
+      // } else {
+        // setHistory(response.data)
+      //   localStorage.setItem("history",response.data)
+      // }
+    })
+    .catch((error)=>{
+      console.error("Dont have anything for you right now : ",error)
+    })
   },[])
 
   return (
@@ -49,6 +64,11 @@ function Home() {
           title = "Continue Watching"
           idkey='showId'
           ids={history}
+          />}
+          {based_on_watch.length>0 && <Find_by_id
+          title = "Based on your watch"
+          idkey='id'
+          ids={based_on_watch}
           />}
           <Row
             title="Top Rated"
