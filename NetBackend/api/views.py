@@ -86,6 +86,7 @@ def for_you(request):
             result = result
             # pd.concat() is a function in pandas that is used to concatenate (or combine) multiple pandas objects (like DataFrames or Series) along a particular axis
             combined_recommendations = pd.concat(result, ignore_index=True)
+            combined_recommendations.drop_duplicates(subset='id', inplace=True)
             if (len(combined_recommendations) > 25) :
                 combined_recommendations = combined_recommendations[0:25]
             recommendations_list = combined_recommendations.to_dict(orient='records')
