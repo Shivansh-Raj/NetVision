@@ -8,7 +8,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import api from '../frontToBackend/api';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForward';
-import Find_by_id from '../find_by_id';
+import Find_by_id from '../Find_by_id';
 
 function Movie_trailers({id,backdrop_path,poster_path,title,overview,name,release_date,first_air_date,vote_average,setModalVisibility}) {
   // const baseUrl =  "https://www.youtube.com/watch?v=";
