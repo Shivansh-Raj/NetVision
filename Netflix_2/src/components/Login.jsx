@@ -4,7 +4,7 @@ import loginImg1 from "../assets/loginImg1.png"
 import loginImg2 from "../assets/loginImg2.png"
 import loginImg3 from "../assets/loginImg3.png"
 import loginKids from "../assets/loginKids.png"
-import Form from './form';
+import Form from './Form';
 import { Navigate, useNavigate } from 'react-router-dom'
 
 function Login({isLogin, isSignup}) {
