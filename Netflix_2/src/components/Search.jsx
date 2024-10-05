@@ -78,7 +78,7 @@ function Search({content}) {
         <Row
             title={`Showing result for ${content}`}
             id="TN"
-            // isLarge
+            isLarge
             isSearch
             content={Movies}
         />
