@@ -5,7 +5,7 @@ import Nav from './Nav.jsx';
 import Banner from './Banner.jsx';
 import Row from './Row.jsx';
 import api from './frontToBackend/api.js';
-import Find_by_id from './Find_by_id';
+import Find_by_id from './Find_by_id.jsx';
 
 function Home() {
   const [searching, setSearching] = useState(false)
