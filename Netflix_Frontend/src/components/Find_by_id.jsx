@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import API_KEY from '../API/API_KEY';
 import Row from './Row';
-function Find_by_id({ids, idkey, title}) {
+function Find_by_id({ids, idkey, title, canDelete}) {
     const [details, setDetails] = useState([]);
     const [ready, setReady] = useState(false)
     const [counter, setcounter] = useState(0)
@@ -47,7 +47,15 @@ function Find_by_id({ids, idkey, title}) {
     },[ids])
   return (
     <>
-        {details.length == counter && <Row title={title} id="TN" isSearch content={details}/>}
+        {details.length == counter && 
+            <Row 
+                title={title} 
+                id="TN" 
+                isSearch 
+                canDelete={canDelete? true:false}
+                content={details}
+            />
+        }
     </>
   )
 }

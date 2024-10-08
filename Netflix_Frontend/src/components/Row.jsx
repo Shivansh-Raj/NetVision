@@ -6,8 +6,10 @@ import axios from '../API/axios';
 import MovieTrailer from "./Movie_trailers/index"
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
+import CancelIcon from '@mui/icons-material/Cancel';
+import api from './frontToBackend/api';
 
-function Row({title,fetchUrl,id,isLarge, isSearch, content}) {
+function Row({title,fetchUrl,id,isLarge, isSearch, content, canDelete}) {
     const baseUrl = "https://image.tmdb.org/t/p/original/";
     const [Movies, setMovies] = useState([])
     const rowRef = useRef(null)
@@ -15,6 +17,7 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content}) {
     const [movieSelected, setMovieSelection] = useState({});
     const [loading, setLoading] = useState(true);
     const [loadingImg, setImageLoading] = useState([]);
+    const [fadeOutIndex, setFadeOutIndex] = useState(null);
     const scrollRight = () => {
         if (rowRef.current) {
             rowRef.current.scrollLeft -= window.innerWidth +4;
@@ -73,6 +76,22 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content}) {
             return updatedLoading
         })
     }
+    const RemoveFromQ = (show_id) => {
+        // api.delete(`/api/UserHistory/${show_id}`)
+        // api.delete(`/api/UserHistory/${show_id}`)
+        console.log(`Sending DELETE request for show ID: ${show_id}`);  
+        api.delete(`/api/UserHistory/${show_id}`)
+        .then ((response) => {
+            setFadeOutIndex(show_id); 
+            setTimeout(() => {
+                setMovies((prev) => prev.filter(movie => movie.id != show_id));
+            }, 500);
+            console.log("Successfully Deleted!!", response)
+        }) .catch ((error) => {
+            setFadeOutIndex(-1);
+            console.error("Unable to Delete ", error)
+        })
+    }
     
 
   return (
@@ -88,7 +107,7 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content}) {
                     {/**SEVERAL ROW__POSTER */}
                     {loading? 
                         Array.from({length:10},(_,index) => {
-                            <Box key={index} className={`row__poster ${isLarge && "row__posterLarge"}`}>
+                            <Box key={index} className={`row__poster ${isLarge && "row__posterLarge"} `}>
                                 <Skeleton
                                     variant="rectangular"
                                     width={isLarge ? 300 : 100}
@@ -98,9 +117,11 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content}) {
                                 />
                             </Box>
                         }
-                        ):(Movies.map((movie,index)=>(
-                            <Box key = {index} className={`row__poster ${isLarge && "row__posterLarge"}` }>
+                    ):(Movies.map((movie,index)=>(
+                        <Box key = {index} className={`row__poster ${isLarge && "row__posterLarge"} ${fadeOutIndex === movie.id ? 'fade-blur' : ''}` }>
+                                {canDelete && <CancelIcon onClick = {() => RemoveFromQ(movie.id)}/>}
                                 {loadingImg[index] && <Skeleton 
+                                    onClick={() => handleClick(movie)}
                                     variant="rectangular" 
                                     width={isLarge ? 300 : 100  }
                                     height='100%'

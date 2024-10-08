@@ -76,7 +76,7 @@ function Movie_trailers({id,backdrop_path,poster_path,title,overview,name,releas
       // recommendations.map((result) => {
       //   console.log(`Title: ${result.title}, ID: ${result.id}`);
       // })
-      api.post(`/api/addToHistory/${id}`)
+      api.post(`/api/UserHistory/${id}`)
       .then((response)=>{
         console.log("Added to HISTORY", response.data)
       })
@@ -112,8 +112,7 @@ function Movie_trailers({id,backdrop_path,poster_path,title,overview,name,releas
                         <span className="arrow__left" onClick={prev_trailer}><ArrowBackIosIcon/></span>
                         <span className="arrow__right" onClick={next_trailer}><ArrowForwardIosIcon/></span>
                       </div>
-                    <h3>{`${trailerUrl}---${id}`}</h3>
-
+                      
                     <div className="modal__content">
                         <p className="modal__details"><span className="modal__user-perc">{randomPorcentaje
                         ()}% for you</span> {release_date ? release_date : first_air_date}</p>

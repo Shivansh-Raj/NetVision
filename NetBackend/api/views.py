@@ -18,7 +18,7 @@ class createUser(generics.CreateAPIView):
     permission_classes = [AllowAny]
 
 # @api_view(['PUT'])
-class addToHistory(APIView):
+class UserHistory(APIView):
     permission_classes = [IsAuthenticated]
     
     def post(self, request, show_id):
@@ -43,21 +43,44 @@ class addToHistory(APIView):
             data = history.objects.filter(user_name = user).order_by('-watched_at')
             # print(data)
             if data:
-                for i in data:
-                    print("---------------------------",i.showId)
+                # for i in data:
+                #     print("---------------------------",i.showId)
                 if(len(data) >30):
-                    history_list = list(data[:30].values())
+                    history_list = (list(data.values()))[0:30]
                 else :
                     history_list = list(data.values())
-                # return Response(history_list, status=status.HTTP_200_OK)
-                return JsonResponse(history_list, safe=False)
+                return Response(history_list, status=status.HTTP_200_OK)
+                # return JsonResponse(history_list, safe=False)
 
             else:
                 return Response({"message": "No history found."}, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
-            print("No history found")
-            print("----error",str(e))
+            # print("No history found")
+            print("*************error",str(e))
             return Response({"----error":str(e)},status=status.HTTP_400_BAD_REQUEST)
+    def delete(self, request, show_id = None):
+        try:
+            user = request.user
+            show_data = history.objects.filter(user_name = user, showId = show_id)
+            if show_data.exists():
+                show_data.delete()
+                return Response({'message': 'Show deleted successfully'}, status=200)
+            else:
+                return Response({'error': 'Show not found'}, status=404)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            # data = history.objects.filter(user_name = user).order_by('-watched_at')
+            # if data:
+            #     for i in data:
+            #         print("---------------------------",i.showId)
+            #     if(len(data) >30):
+            #         history_list = list(data[:30].values())
+            #     else :
+            #         history_list = list(data.values())
+            #     return Response(history_list, status=status.HTTP_200_OK)
+                # return JsonResponse(data, safe=False)
+            # else:
+            #     return Response({"message": "No history found."}, status=status.HTTP_404_NOT_FOUND)
 
 
 @api_view(['GET']) 
@@ -77,8 +100,8 @@ def for_you(request):
             if (len(recommendations) > 2):
                 counter += 1
                 result.append(recommendations)
-            else:
-                print("Not enough for recommendations")
+            # else:
+            #     print("Not enough for recommendations")
                 # return Response({"message": "Nothing to recommend"}, status=status.HTTP_404_NOT_FOUND)
         if result:
             random.shuffle(result)
@@ -92,10 +115,10 @@ def for_you(request):
             recommendations_list = combined_recommendations.to_dict(orient='records')
             return JsonResponse(recommendations_list, safe=False)
         else:
-            print("No recommednations")
+            # print("No recommednations")
             return Response({"message": "Nothing to recommend"}, status=status.HTTP_404_NOT_FOUND)   
     except Exception as e:
-        print("------error",str(e))
+        # print("------error",str(e))
         return Response({"----error":str(e)},status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET']) 

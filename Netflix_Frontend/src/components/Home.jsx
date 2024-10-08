@@ -19,7 +19,7 @@ function Home() {
   //   )
   // },[])
   useEffect(()=>{
-    api.get(`/api/addToHistory/0`)
+    api.get(`/api/UserHistory/0`)
     .then((response)=>{
       console.log("History watch : ", response.data)
       // if (localStorage.getItem("history")) {
@@ -62,6 +62,7 @@ function Home() {
           />
           {history.length>0 && <Find_by_id
           title = "Continue Watching"
+          canDelete
           idkey='showId'
           ids={history}
           />}

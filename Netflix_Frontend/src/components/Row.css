@@ -96,6 +96,7 @@
   }
   .row__poster:hover {
     transform: scale(1.2);
+    z-index: 1000;
   }
   .row__posterLarge {
     height: 180px;
@@ -141,5 +142,24 @@
     .row__posterLarge {
       max-height: 280px;
     }
+    .slider__arrow-left{
+      background: rgba(20,20,20,.5);
+      transition: 400ms all ease-in-out;
+      visibility: visible;      
+    }
+    .slider__arrow-right{
+      visibility: visible;
+      background: rgba(20,20,20,.5);
+      transition: 400ms all ease-in-out;
+    
+    }
   }
   
+
+  /* Delete effect */
+  .fade-blur {
+    /* Both opacity and filter will take .5 seconds */
+    transition: opacity 0.5s ease-out, filter 0.5s ease-out;
+    filter: blur(5px);
+    opacity: 0;
+}
