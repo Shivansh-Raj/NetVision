@@ -44,20 +44,16 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content, canDelete}) {
                 const request = await axios.get(fetchUrl);
                 setMovies(request.data.results)
                 setImageLoading(Array(request.data.results.length).fill(true))
-                // console.log(Array(request.data.results.length).fill(true));
-                // console.log(request.data.results);
                 setLoading(false);
                 return request
             }
             fetchdata()
         } else {
-            console.log(content)
             setMovies(content);
             setImageLoading(Array(content.length).fill(true))
-            // console.log("-->content at Row.jsx : ",content)
             setLoading(false)
         }
-    },[fetchUrl,content, isSearch])
+    },[fetchUrl, content, isSearch])
     // useEffect(()=>{
     //     if (loadedImg == Movies.length) {
     //         setLoading(false);
@@ -69,16 +65,13 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content, canDelete}) {
         setMovieSelection(movie);
     }
     const handleImageLoad = (index) => {
-        // console.log(index)
         setImageLoading((prev) => {
             const updatedLoading = [...prev];
-            updatedLoading[index] = false;
-            return updatedLoading
-        })
-    }
+            updatedLoading[index] = false; 
+            return updatedLoading;  
+        });
+    };
     const RemoveFromQ = (show_id) => {
-        // api.delete(`/api/UserHistory/${show_id}`)
-        // api.delete(`/api/UserHistory/${show_id}`)
         console.log(`Sending DELETE request for show ID: ${show_id}`);  
         api.delete(`/api/UserHistory/${show_id}`)
         .then ((response) => {
@@ -130,6 +123,7 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content, canDelete}) {
                                 />}
                                 
                                 <img
+                                    id={`movie-img-${index}`}
                                     onClick={() => handleClick(movie)}
                                     src={`${baseUrl}${isLarge?movie.backdrop_path : movie.poster_path}`}
                                     onLoad={() => handleImageLoad(index)}
