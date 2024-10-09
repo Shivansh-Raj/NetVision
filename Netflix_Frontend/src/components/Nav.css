@@ -76,6 +76,7 @@
 
 .nav__black {
     background-color: rgba(0, 0, 0, 0.9); /* Dark background when active */
+    z-index : 1999;
 }
 
 .nav__logo {

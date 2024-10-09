@@ -18,6 +18,7 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content, canDelete}) {
     const [loading, setLoading] = useState(true);
     const [loadingImg, setImageLoading] = useState([]);
     const [fadeOutIndex, setFadeOutIndex] = useState(null);
+    const imageRefs = useRef([]);
     const scrollRight = () => {
         if (rowRef.current) {
             rowRef.current.scrollLeft -= window.innerWidth +4;
@@ -29,12 +30,20 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content, canDelete}) {
         }
     }
     
-    // useEffect(() => {
-        
-    //     setTimeout(() => {
-    //       setLoading(false);
-    //     }, 2000); 
-    //   }, []);
+
+    const checkCachedImages = () => {
+        // The .complete property is used to check if an image (or any media element) has finished loading. It returns a boolean value: true (if has fully loaded either successfully or from cache)
+        imageRefs.current.forEach((imgRef, index) => {
+          const movie = Movies[index]; // Get the current movie
+          try {
+            if (movie.poster_path && imgRef && imgRef.complete) {
+                handleImageLoad(index); 
+            } 
+          } catch (error) {
+            console.log(error);
+          }
+        });
+      };
 
     useEffect(()=>{
         setLoading(true);
@@ -52,6 +61,7 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content, canDelete}) {
             setMovies(content);
             setImageLoading(Array(content.length).fill(true))
             setLoading(false)
+            checkCachedImages();
         }
     },[fetchUrl, content, isSearch])
     // useEffect(()=>{
@@ -68,6 +78,13 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content, canDelete}) {
         setImageLoading((prev) => {
             const updatedLoading = [...prev];
             updatedLoading[index] = false; 
+            return updatedLoading;  
+        });
+    };
+    const handleImageError = (index) => {
+        setImageLoading((prev) => {
+            const updatedLoading = [...prev];
+            updatedLoading[index] = true; 
             return updatedLoading;  
         });
     };
@@ -112,7 +129,6 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content, canDelete}) {
                         }
                     ):(Movies.map((movie,index)=>(
                         <Box key = {index} className={`row__poster ${isLarge && "row__posterLarge"} ${fadeOutIndex === movie.id ? 'fade-blur' : ''}` }>
-                                {canDelete && <CancelIcon onClick = {() => RemoveFromQ(movie.id)}/>}
                                 {loadingImg[index] && <Skeleton 
                                     onClick={() => handleClick(movie)}
                                     variant="rectangular" 
@@ -120,17 +136,19 @@ function Row({title,fetchUrl,id,isLarge, isSearch, content, canDelete}) {
                                     height='100%'
                                     animation="wave" 
                                     sx={{ bgcolor: 'grey.700' }} 
-                                />}
+                                    />}
                                 
                                 <img
-                                    id={`movie-img-${index}`}
+                                    ref = {(el) => (imageRefs.current[index] = el)}
                                     onClick={() => handleClick(movie)}
+                                    // src ={`${baseUrl}${isLarge ? movie.backdrop_path : movie.poster_path}?t=${new Date().getTime()}`}
                                     src={`${baseUrl}${isLarge?movie.backdrop_path : movie.poster_path}`}
                                     onLoad={() => handleImageLoad(index)}
                                     style={{ display: loadingImg[index] ? 'none' : 'block' }}
                                     // loading='lazy'
                                     alt={movie.name}
                                 />
+                                {canDelete && <CancelIcon onClick = {() => RemoveFromQ(movie.id)}/>}
                             </Box> 
                         )))
                     }

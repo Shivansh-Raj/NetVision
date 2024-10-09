@@ -16,7 +16,7 @@
     transition: 400ms all ease-in-out;
     cursor: pointer;
     width: 80px;
-    z-index: 1000;
+    z-index: 400;
     position: absolute;
     left: 0;
     top: 0;
@@ -33,7 +33,7 @@
     transition: 400ms all ease-in-out;
     cursor: pointer;
     width: 80px;
-    z-index: 1000;
+    z-index: 400;
     position: absolute;
     right: 0;
     top: 0;
@@ -96,7 +96,7 @@
   }
   .row__poster:hover {
     transform: scale(1.2);
-    z-index: 1000;
+    z-index:300;
   }
   .row__posterLarge {
     height: 180px;
