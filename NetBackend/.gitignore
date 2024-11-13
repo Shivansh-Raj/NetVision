@@ -1,4 +1,4 @@
-.env
+# .env
 db.sqlite3
 build_files.sh
 vercel.json
