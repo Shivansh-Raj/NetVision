@@ -102,6 +102,8 @@ WSGI_APPLICATION = 'NetBackend.wsgi.application'
 #     }
 # }
 
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -110,6 +112,11 @@ DATABASES = {
         'PASSWORD':os.getenv("DB_PWD"),
         'HOST':os.getenv("DB_HOST"),
         'PORT':os.getenv("DB_POST"),
+        # 'NAME': DB_NAME,
+        # 'USER':DB_USER,
+        # 'PASSWORD':DB_PWD,
+        # 'HOST':DB_HOST,
+        # 'PORT':DB_POST,
 
     }
 }
