@@ -4,7 +4,7 @@
 
 ## Live Demo
 
-Check out the live site: [NetVision Live](https://db77a444-4314-4f62-b2b3-befc23cfea97.e1-us-east-azure.choreoapps.dev/login)
+Check out the live site: [NetVision Live](https://be7b7f93-17c5-495f-97f7-bc156dbc50d4.e1-us-cdp-2.choreoapps.dev/login)
 
 ## Features
 
