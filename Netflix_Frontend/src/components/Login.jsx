@@ -55,6 +55,9 @@ function Login({isLogin, isSignup}) {
           navigate("/login");
         }
       }
+      const navigateToGuest = () => {
+        navigate("/Guest");
+    };
 
   return (
     <div className="app">
@@ -93,13 +96,14 @@ function Login({isLogin, isSignup}) {
             />}
           {!showForm && <button className="app__getStarted" onClick={handleGetStarted}>Get Started</button>}
         </div>
+        {/* Guest Button */}
         {showForm && isLogin && (
-            <Form
-            method="login"
-            route="/api/token/"
-            username={username}
-            password={password}
-            />
+          <Form
+          method="login"
+          route="/api/token/"
+          username={username}
+          password={password}
+          />
         )}
         {showForm && isSignup && (
             <Form
@@ -109,8 +113,9 @@ function Login({isLogin, isSignup}) {
             password={password}
             email = {email}
             />
-        )}
-      </div>
+          )}
+        <p className="app__guestLink" onClick={navigateToGuest}>Continue as a Guest</p>
+        </div>
 
       {/* Scroll Feature */}
       <div className="app__sections">

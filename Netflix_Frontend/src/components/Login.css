@@ -149,3 +149,24 @@
     }
   }
   
+
+  /* Guest button */
+  .app__guestLink {
+    position: relative;
+    color: #e50914;  /* Netflix red color */
+    font-size: 18px;
+    /* font-weight: bold; */
+    text-decoration: underline 1.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .app__guestLink:hover {
+    color: #f40612;  /* Darker red on hover */
+    transform: scale(1.05);  /* Slight zoom effect on hover */
+  }
+  
+  .app__guestLink:active {
+    color: #b20710;  /* Even darker red on click */
+  }
+  

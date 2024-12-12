@@ -19,6 +19,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="/Guest" element = {<Home/>}/>
           <Route path="/login" element = {<Login isLogin = {true} isSignup = {false} /> }/>
           <Route path="/signup" element = {<Login isLogin = {false} isSignup = {true} /> }/>
         </Routes>
