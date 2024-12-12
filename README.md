@@ -4,7 +4,7 @@
 
 ## Live Demo
 
-Check out the live site: [NetVision Live](net-vision-da6i.vercel.app)
+Check out the live site: [NetVision Live](https://net-vision-da6i.vercel.app/login)
 
 ## Features
 
