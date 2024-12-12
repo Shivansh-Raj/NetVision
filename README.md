@@ -4,7 +4,8 @@
 
 ## Live Demo
 
-Check out the live site: [NetVision Live](https://net-vision-da6i-2wusy4f01-shivansh-rajdehls-projects.vercel.app/)
+Check out the live site: [NetVision Live](https://netvision-nv.choreoapps.dev/)
+If the above link doesn't work. [click here](https://net-vision-da6i-2wusy4f01-shivansh-rajdehls-projects.vercel.app/)
 
 ## Features
 
