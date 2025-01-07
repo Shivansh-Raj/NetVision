@@ -17,7 +17,7 @@ function Form({method, route, email, username, password}) {
             if (method == "login") {
                 localStorage.setItem(ACCESS_TOKEN, res.data.access)
                 localStorage.setItem(REFRESH_TOKEN, res.data.refresh)
-                alert(username+"  "+password)
+                // alert(username+"  "+password)
                 navigate("/")
             } else {
                 navigate("/login")

@@ -13,6 +13,7 @@ function Login({isLogin, isSignup}) {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState(""); 
     const [showForm, setShowForm] = useState(false);
+    const [showDisclaimer, setShowDisclaimer] = useState(true);
     const navigate = useNavigate()
     useEffect(() => {
         const handleScroll = () => {
@@ -59,8 +60,28 @@ function Login({isLogin, isSignup}) {
         navigate("/Guest");
     };
 
+    const closeDisclaimer = () => {
+      setShowDisclaimer(false);
+    };
   return (
     <div className="app">
+
+            {/* Disclaimer Modal */}
+            {showDisclaimer && (
+                <div className="app__disclaimer">
+                    <div className="app__disclaimerContent">
+                        <p>⚠️ Disclaimer: This is a personal project built for educational purposes only. All data and forms use dummy values and are not associated with any real service.</p>
+                        <button onClick={closeDisclaimer}>Close</button>
+                    </div>
+                </div>
+            )}
+
+            {/* Top Disclaimer Banner */}
+            <div className="app__banner">
+                ⚠️ Disclaimer: This is a personal project for educational purposes only. All data is dummy data.
+            </div>
+
+
       <div className="app__background">
         <img 
           className="app__logo" 
