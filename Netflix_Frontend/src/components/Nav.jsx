@@ -3,10 +3,19 @@ import "./Nav.css";
 import reactsvg from '../assets/react.svg'
 import SearchIcon from '@mui/icons-material/Search';
 import Search from './Search';
+import { Navigate, useNavigate } from 'react-router-dom';
+
 const Nav= ({setSearching, searching})=> {
+    const navigate = useNavigate()
     const [show, handleShow] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [isSearchActive, setIsSearchActive] = useState(false); 
+    const toLogin = () => {
+        navigate("/login")
+    }
+    const toHome = () => {
+        navigate("/")
+    }
 
     useEffect(()=>{
         window.addEventListener("scroll", () =>{
@@ -45,6 +54,7 @@ const Nav= ({setSearching, searching})=> {
                 alt="Netflix logo"
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/170px-Netflix_2015_logo.svg.png"
                 className="nav__logo"
+                onClick={toHome}
             />
 
             {/* Microscope Icon */}
@@ -58,6 +68,7 @@ const Nav= ({setSearching, searching})=> {
                 alt="User logged"
                 src={reactsvg}
                 className="nav__avatar"
+                onClick={toLogin}
             />
         </nav>
         {/* Full-width Search Bar */}
