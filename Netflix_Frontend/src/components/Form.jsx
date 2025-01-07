@@ -23,7 +23,12 @@ function Form({method, route, email, username, password}) {
                 navigate("/login")
             }
         } catch (error) {
-            alert(error)
+            console.log(error)
+            if (method == "login") {
+                alert("Invalid Credentials!")
+            } else {
+                alert("User with the same username already exist!")
+            }
         } finally {
             setLoading(false)
         }

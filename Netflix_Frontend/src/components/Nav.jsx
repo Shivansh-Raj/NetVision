@@ -4,6 +4,7 @@ import reactsvg from '../assets/react.svg'
 import SearchIcon from '@mui/icons-material/Search';
 import Search from './Search';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from './frontToBackend/constants';
 
 const Nav= ({setSearching, searching})=> {
     const navigate = useNavigate()
@@ -11,6 +12,8 @@ const Nav= ({setSearching, searching})=> {
     const [searchTerm, setSearchTerm] = useState('');
     const [isSearchActive, setIsSearchActive] = useState(false); 
     const toLogin = () => {
+        localStorage.setItem(ACCESS_TOKEN, "")
+        localStorage.setItem(REFRESH_TOKEN, "")
         navigate("/login")
     }
     const toHome = () => {
