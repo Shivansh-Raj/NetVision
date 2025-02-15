@@ -33,5 +33,5 @@
 ### Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/NetVision.git
+git clone https://github.com/Shivansh-Raj/NetVision.git
 cd NetVision
