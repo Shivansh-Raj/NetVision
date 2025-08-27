@@ -4,7 +4,7 @@
 
 ## Live Demo
 
-- Check out the live site: [NetVision Live](https://netvision-nv.choreoapps.dev/) 
+- Check out the live site: [NetVision Live](https://netvision-nv-2.choreoapps.dev/) 
 - If the above link doesn't work. [click here](https://net-vision-da6i-2wusy4f01-shivansh-rajdehls-projects.vercel.app/)
 
 ## Features
@@ -33,5 +33,5 @@
 ### Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/NetVision.git
+git clone https://github.com/Shivansh-Raj/NetVision.git
 cd NetVision
