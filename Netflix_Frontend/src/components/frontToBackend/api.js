@@ -10,7 +10,8 @@ const apiUrl = "https://b53520bd-d323-4148-9d70-2ac5014cbacb-prod.e1-us-east-azu
 // });
 
 const api = axios.create({
-  baseURL: apiUrl || import.meta.env.VITE_API_URL,
+//   baseURL:  import.meta.env.VITE_API_URL,
+  baseURL: import.meta.env.VITE_API_URL || apiUrl,
 });
 
 

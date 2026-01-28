@@ -13,7 +13,7 @@ function Search({content}) {
     const [ready,setReady] = useState(false)
     const [genre, setGenre] = useState([])
     const [genreDictionary, setgenreDictionary] = useState({})
-    const baseUrl = `https://api.themoviedb.org/3/search/multi?query=${content}&include_adult=false&api_key=${API_KEY}&page=1`
+    const baseUrl = `https://api.themoviedb.org/3/search/multi?query=${content}&include_adult=true&api_key=${API_KEY}&page=1`
     // &language=jv-JP
     let temp;
     useEffect (()=>{
